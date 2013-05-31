@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+        "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>jsonTest</title>
+	
+</head>
+	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<body>
+<form method="post">
+	<input type="submit" id="button" value="Button">
+</form>
+<div></div>
+
+<script>
+
+$(document).ready(function(){
+
+var obj = {"four":"4 / four"};
+
+$("#button").click(function(e, obj){
+	e.preventDefault();
+	console.log("boom");
+
+// 	$.post("posting.php", obj, function(data){console.log(obj)});
+
+		$.ajax({
+			url		: "posting.php",
+			type	: "POST",
+			data	: obj,
+		})
+	});
+});
+</script>
+</body>
+</html>
