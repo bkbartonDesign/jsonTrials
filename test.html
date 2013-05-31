@@ -10,7 +10,8 @@
 	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <body>
 <form method="post">
-	<input type="submit" id="button" value="Button">
+	<input type="submit" id="add" value="ADD">
+	<input type="submit" id="show" value="SHOW">
 </form>
 <div></div>
 
@@ -20,17 +21,53 @@ $(document).ready(function(){
 
 var obj = {"four":"4 / four"};
 
-$("#button").click(function(e, obj){
+$("#add").click(function(e, obj){
 	e.preventDefault();
-	console.log("boom");
-
-// 	$.post("posting.php", obj, function(data){console.log(obj)});
-
+	
 		$.ajax({
 			url		: "posting.php",
 			type	: "POST",
 			data	: obj,
 		})
+	});
+
+$("#show").click(function(e){
+	e.preventDefault();
+
+	$.ajax({
+		url		: "data.json",
+		type	: "GET",
+		dataType: "json",
+					success	: function(data){ 
+								var items=[];
+					 
+								 $.each(data, function(key, val) {
+									items.push('<li id="' + key + '">' + val + '</li>');
+								});
+						
+								$('<ul/>', {
+									'class': 'my-new-list',
+									html: items.join('')
+								}).appendTo('body');
+						}
+	})
+	
+// 		$.getJSON({ 
+// 					url		: "data.json", 
+// 					success	: function(data){ 
+// 								var items=[];
+// 					 
+// 								 $.each(data, function(key, val) {
+// 									items.push('<li id="' + key + '">' + val + '</li>');
+// 								});
+// 						
+// 								$('<ul/>', {
+// 									'class': 'my-new-list',
+// 									html: items.join('')
+// 								}).appendTo('body');
+// 						}
+// 			})
+
 	});
 });
 </script>
