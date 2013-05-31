@@ -19,17 +19,19 @@
 
 $(document).ready(function(){
 
-var obj = {"four":"4 / four"};
+$obj = {"four":"4 / four"};
 
 $("#add").click(function(e, obj){
 	e.preventDefault();
-	
-		$.ajax({
-			url		: "posting.php",
-			type	: "POST",
-			data	: obj,
-		})
-	});
+	console.log(obj);
+	$.ajax({
+		url		: "posting.php",
+		type	: "POST",
+		dataType: "json",
+		data	: $obj,
+		success : function(data){console.log(data);}	
+	})
+});
 
 $("#show").click(function(e){
 	e.preventDefault();
@@ -51,22 +53,6 @@ $("#show").click(function(e){
 								}).appendTo('body');
 						}
 	})
-	
-// 		$.getJSON({ 
-// 					url		: "data.json", 
-// 					success	: function(data){ 
-// 								var items=[];
-// 					 
-// 								 $.each(data, function(key, val) {
-// 									items.push('<li id="' + key + '">' + val + '</li>');
-// 								});
-// 						
-// 								$('<ul/>', {
-// 									'class': 'my-new-list',
-// 									html: items.join('')
-// 								}).appendTo('body');
-// 						}
-// 			})
 
 	});
 });
