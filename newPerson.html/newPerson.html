@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="#.css" />
+
+<style type="text/css">
+</style>
+</head>
+<body>
+<form method="POST" action="" id="add">
+	<label for="fname">First Name</label>
+	<input type="text" id="fname" name="fname"/>
+	<label for="lname">Last Name</label>
+	<input type="text" id="lname" name="lname"/>
+	<input type="submit" id="addPerson" value="Add Person"/>
+</form>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+
+
+$("#addPerson").click(function(e){
+	e.preventDefault();
+	var newPerson = personCreate.create;
+	console.log(newPerson);
+});
+
+// Person Constructor
+
+function Person (fname, lname, id){	
+
+	this.fname 	= fname;
+	this.lname 	= lname;
+	this.id 	= id;
+
+}
+
+// Person Creator
+
+var personCreate = (function (){
+	// private
+	var id = 0;
+	var fname =  $("#fname").val().trim();
+	var lname = $("#lname").val().trim();
+	
+	function idIt(id){return id++;}
+	
+	
+	//public
+	return {
+		create	: new Person ( fname, lname, idIt() )
+	}
+		
+}());
+
+// ID Maker
+
+var idMaker = (function(){
+	// private
+	var id = 1;
+	
+	//public
+	return {
+		i: function(){ id++; console.log(id); }
+	}
+}());
+
+});
+</script>
+
+</body>
+
+</html>
